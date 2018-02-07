@@ -1,0 +1,111 @@
+﻿<Window x:Class="FifthDay.Windows.EndRepairWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FifthDay.Windows"
+        mc:Ignorable="d"
+                Title="AcceptGoodsInRepairWindow" FontSize="16" Background="LightCyan" Height="600" Width="1200" MinHeight="590" MinWidth="1080" WindowStartupLocation="CenterScreen" WindowStyle="None">
+    <Grid>
+        <TextBlock Text="Заврешение горантийного ремонта" HorizontalAlignment="Center" Margin="0 10 0 0" FontSize="20"/>
+        <Button Click="click_Back" Content="Назад" Width="100" Height="30" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="10"/>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Margin="10">
+                <TextBlock Text="Поиск по дате поступления в гарантийный ремонт: " VerticalAlignment="Center"/>
+                <DatePicker x:Name="dpDate" Width="150"/>
+                <Button Click="click_Search" Content="Поиск" Margin="20 0 0 0" Width="70"/>
+            </StackPanel>
+
+            <StackPanel Width="1000">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="2">
+                    <TextBlock Text="За последний " VerticalAlignment="Center" FontSize="10"/>
+                    <ComboBox x:Name="cbxPeriod" SelectionChanged="select_cbxPeriod" Width="100" FontSize="10"/>
+                </StackPanel>
+
+                <ListView x:Name="lv" Height="300" FontSize="12">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Товар" Width="150">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                            <TextBlock Text="{Binding Path=GoodsBuy.Goods.Name}" TextWrapping="Wrap"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Header="Изготовитель" Width="150">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                            <TextBlock Text="{Binding Path=GoodsBuy.Goods.Companies.Name}" TextWrapping="Wrap"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Header="Дата покупки" Width="100">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                            <TextBlock Text="{Binding Path=GoodsBuy.DateBuy}" TextWrapping="Wrap"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Header="Дата пост-я в ремонт" Width="150">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Path=StartDate}" TextWrapping="Wrap"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Header="Дата изг-я" Width="100">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                            <TextBlock Text="{Binding Path=GoodsBuy.Goods.DateStart}" TextWrapping="Wrap"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Header="Гарантия (дни)" Width="100">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                            <TextBlock Text="{Binding Path=GoodsBuy.Goods.Period}" TextWrapping="Wrap"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Header="Цена" Width="100">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                            <TextBlock Text="{Binding Path=GoodsBuy.Goods.Cost}" TextWrapping="Wrap"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Header="Изобр-е" Width="120">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                            <Image Source="{Binding Path=GoodsBuy.Goods.Picture}" Width="100"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </StackPanel>
+            <GroupBox Header="Данные гарантийного ремонта" Height="100" Width="1100" Margin="10">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+                    <TextBlock Text="Что было отремонтировано: " VerticalAlignment="Center"/>
+                    <TextBox x:Name="tbxComment" Width="300" Height="65" TextWrapping="Wrap"/>
+                    
+                    <TextBlock Text="Цена ремонта: " VerticalAlignment="Center" Margin="20 0 0 0"/>
+                    <TextBox x:Name="tbxCostRepair" Width="150" Height="30" MaxLength="15"/>
+                    
+                    <TextBlock Text="Новая гарантия (дни): " VerticalAlignment="Center" Margin="20 0 0 0"/>
+                    <TextBox x:Name="tbxGuarantee" Width="80" Height="30"/>
+                </StackPanel>
+            </GroupBox>
+
+            <Button Click="click_End" Content="Заврешить гарантийный ремонт" Margin="5" Width="300"/>
+        </StackPanel>
+    </Grid>
+</Window>
